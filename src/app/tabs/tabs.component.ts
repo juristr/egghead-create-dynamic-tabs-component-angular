@@ -17,13 +17,15 @@ import { DynamicTabAnchorDirective } from './dynamic-tab-anchor.directive';
       </li>
     </ul>
     <ng-content></ng-content>
-    <ng-template dynamicTabAnchor></ng-template>
+    <ng-template dynamicTabAnchor #container></ng-template>
   `
 })
 export class TabsComponent implements AfterContentInit {
   @ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
   @ViewChild(DynamicTabAnchorDirective)
   dynamicTabPlaceholder: DynamicTabAnchorDirective;
+  // @ViewChild('container', { read: ViewContainerRef })
+  // dynamicTabPlaceholder;
 
   // contentChildren are set
   ngAfterContentInit() {

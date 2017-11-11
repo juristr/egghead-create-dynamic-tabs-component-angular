@@ -20,7 +20,7 @@ import { TabsComponent } from './tabs/tabs.component';
 })
 export class AppComponent implements OnInit {
   @ViewChild('personEdit') personEditTemplate;
-  @ViewChild(TabsComponent) tabsComponent;
+  @ViewChild(TabsComponent) tabsComponent: TabsComponent;
   people;
 
   constructor(private peopleService: PeopleService) {}
@@ -34,6 +34,10 @@ export class AppComponent implements OnInit {
   }
 
   onAddPerson() {
-    this.tabsComponent.openTab();
+    this.tabsComponent.openTab(
+      'Dynamic title',
+      this.personEditTemplate,
+      this.people[0]
+    );
   }
 }

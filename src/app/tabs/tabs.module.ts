@@ -7,6 +7,7 @@ import { DynamicTabAnchorDirective } from './dynamic-tab-anchor.directive';
 @NgModule({
   imports: [CommonModule],
   declarations: [TabsComponent, TabComponent, DynamicTabAnchorDirective],
-  exports: [TabsComponent, TabComponent]
+  exports: [TabsComponent, TabComponent],
+  entryComponents: [TabComponent]
 })
 export class TabsModule {}

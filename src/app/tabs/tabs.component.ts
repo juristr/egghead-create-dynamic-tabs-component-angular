@@ -11,7 +11,7 @@ import { TabComponent } from './tab.component';
   template: `
     <ul class="nav nav-tabs">
       <li *ngFor="let tab of tabs" (click)="selectTab(tab)" [class.active]="tab.active">
-        <a href="#">{{tab.title}}</a>
+        <a href="#">{{tab.tabTitle}}</a>
       </li>
     </ul>
     <ng-content></ng-content>
@@ -23,7 +23,7 @@ export class TabsComponent implements AfterContentInit {
   // contentChildren are set
   ngAfterContentInit() {
     // get all active tabs
-    let activeTabs = this.tabs.filter(tab => tab.active);
+    const activeTabs = this.tabs.filter(tab => tab.active);
 
     // if there is no active tab set, activate the first
     if (activeTabs.length === 0) {

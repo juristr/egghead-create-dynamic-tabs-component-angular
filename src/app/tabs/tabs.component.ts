@@ -36,7 +36,7 @@ export class TabsComponent implements AfterContentInit {
     }
   }
 
-  openTab() {
+  public openTab() {
     console.log(this.dynamicTabPlaceholder.viewContainer);
   }
 

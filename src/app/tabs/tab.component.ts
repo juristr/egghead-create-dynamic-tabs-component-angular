@@ -13,7 +13,9 @@ import { Component, Input } from '@angular/core';
     <div [hidden]="!active" class="pane">
       <ng-content></ng-content>
       <ng-container *ngIf="template"
-        [ngTemplateOutlet]="template"></ng-container>
+        [ngTemplateOutlet]="template"
+        [ngTemplateOutletContext]="{person: dataContext}">
+      </ng-container>
     </div>
   `
 })
@@ -21,4 +23,5 @@ export class TabComponent {
   @Input() tabTitle: string;
   @Input() active = false;
   @Input() template;
+  @Input() dataContext;
 }

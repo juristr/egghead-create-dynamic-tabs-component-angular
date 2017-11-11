@@ -18,7 +18,7 @@ import { DynamicTabAnchorDirective } from './dynamic-tab-anchor.directive';
       </li>
       <!-- dynamic tabs -->
       <li *ngFor="let tab of dynamicTabs" (click)="selectTab(tab)" [class.active]="tab.active">
-        <a href="#">{{tab.tabTitle}}</a>
+        <a href="#">{{tab.tabTitle}} <span class="tab-close" *ngIf="tab.isCloseable" (click)="closeTab(tab)">x</span></a>
       </li>
     </ul>
     <ng-content></ng-content>
@@ -46,7 +46,7 @@ export class TabsComponent implements AfterContentInit {
     }
   }
 
-  openTab(title: string, template, data) {
+  openTab(title: string, template, data, isCloseable: boolean = true) {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
       TabComponent
     );
@@ -61,6 +61,7 @@ export class TabsComponent implements AfterContentInit {
     instance.tabTitle = title;
     instance.template = template;
     instance.dataContext = data;
+    instance.isCloseable = isCloseable;
 
     this.dynamicTabs.push(instance);
 
@@ -74,5 +75,23 @@ export class TabsComponent implements AfterContentInit {
 
     // activate the tab the user has clicked on.
     tab.active = true;
+  }
+
+  closeTab(tab: TabComponent) {
+    for (let i = 0; i < this.dynamicTabs.length; i++) {
+      if (this.dynamicTabs[i] === tab) {
+        // remove the tab from our array
+        this.dynamicTabs.splice(i, 1);
+
+        // destroy our dynamically created component again
+        const viewContainerRef = this.dynamicTabPlaceholder.viewContainer;
+        // let viewContainerRef = this.dynamicTabPlaceholder;
+        viewContainerRef.remove(i);
+
+        // set tab index to 1st one
+        this.selectTab(this.tabs.first);
+        break;
+      }
+    }
   }
 }

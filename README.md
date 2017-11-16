@@ -1,27 +1,34 @@
-# DynamicTabs
+# Egghead Course: Create a Dynamic Tabs Component with Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
+by Juri Strumpflohner ([Twitter](https://twitter.com/juristr) - [Blog](https://juristr.com/blog))
 
-## Development server
+This repository is organized in different branches, one branch for each video lesson.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Contents
 
-## Code scaffolding
+1. [Get to know our basic Angular TabsComponent](https://github.com/juristr/egghead-create-dynamic-tabs-component-angular/tree/master)
+1. Declare a template within a template using `ng-template` in Angular
+1. [Pass a reference of an ng-template to a component and render it in Angular](https://github.com/juristr/egghead-create-dynamic-tabs-component-angular/tree/02-ng-container-and-template-outlet)
+1. [Pass data to be rendered in a dynamic ng-template using ngTemplateOutletContext in Angular](https://github.com/juristr/egghead-create-dynamic-tabs-component-angular/tree/03-ng-outlet-context)
+1. [Define an anchor point where to render dynamic components in Angular](https://github.com/juristr/egghead-create-dynamic-tabs-component-angular/tree/04-define-anchor-point)
+1. [Dynamically instantiate an Angular component](https://github.com/juristr/egghead-create-dynamic-tabs-component-angular/tree/05-dynamically-instantiate-component)
+1. [Destroy a dynamically instantiated Angular component](https://github.com/juristr/egghead-create-dynamic-tabs-component-angular/tree/06-destroy-dynamic-components)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## Setup & Run
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Clone the repository and install all packages
 
-## Running unit tests
+```
+$ npm install
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run the project by executing
 
-## Running end-to-end tests
+```
+$ npm start
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Questions?
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Feel free to reach out to me [on Twitter](https://twitter.com/juristr) or [open an issue](https://github.com/juristr/egghead-create-dynamic-tabs-component-angular/issues).

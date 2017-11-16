@@ -12,7 +12,7 @@ import { PeopleService } from './people/people.service';
       <ngx-tab tabTitle="Tab 2" [template]="personEdit" [dataContext]="people[0]"></ngx-tab>
     </ngx-tabs>
 
-    <ng-template let-person="person" #personEdit>
+    <ng-template let-person="data" #personEdit>
       Hi, I'm {{ person?.name }}.
     </ng-template>
   `

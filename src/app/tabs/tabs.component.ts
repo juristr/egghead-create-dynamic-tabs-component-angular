@@ -3,9 +3,11 @@ import {
   ContentChildren,
   QueryList,
   AfterContentInit,
-  ViewChild
+  ViewChild,
+  ViewContainerRef
 } from '@angular/core';
 import { TabComponent } from './tab.component';
+
 import { DynamicTabAnchorDirective } from './dynamic-tab-anchor.directive';
 
 @Component({
@@ -17,15 +19,18 @@ import { DynamicTabAnchorDirective } from './dynamic-tab-anchor.directive';
       </li>
     </ul>
     <ng-content></ng-content>
-    <ng-template dynamicTabAnchor #container></ng-template>
+    <ng-template appDynamicTabAnchor #container></ng-template>
   `
 })
 export class TabsComponent implements AfterContentInit {
   @ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
   @ViewChild(DynamicTabAnchorDirective)
   dynamicTabPlaceholder: DynamicTabAnchorDirective;
-  // @ViewChild('container', { read: ViewContainerRef })
-  // dynamicTabPlaceholder;
+  // @ViewChild('container', { read: ViewContainerRef }) placeholder;
+
+  openTab() {
+    console.log(this.dynamicTabPlaceholder.viewContainer);
+  }
 
   // contentChildren are set
   ngAfterContentInit() {
@@ -36,10 +41,6 @@ export class TabsComponent implements AfterContentInit {
     if (activeTabs.length === 0) {
       this.selectTab(this.tabs.first);
     }
-  }
-
-  public openTab() {
-    console.log(this.dynamicTabPlaceholder.viewContainer);
   }
 
   selectTab(tab: TabComponent) {

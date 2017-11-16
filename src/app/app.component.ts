@@ -8,13 +8,15 @@ import { TabsComponent } from './tabs/tabs.component';
     <h1>Angular tabs</h1>
     <ngx-tabs>
       <ngx-tab tabTitle="People List">
-        <app-people-list [people]="people" (addPerson)="onAddPerson()"></app-people-list>
+        <app-people-list [people]="people"
+          (addPerson)="onAddPerson()"
+          (editPerson)="onEditPerson($event)">
+          ></app-people-list>
       </ngx-tab>
-      <ngx-tab tabTitle="Tab 2" [template]="personEdit" [dataContext]="people[0]"></ngx-tab>
     </ngx-tabs>
 
     <ng-template let-person="person" #personEdit>
-      Hi, I'm {{ person?.name }}.
+      <app-person-edit [person]="person" (savePerson)="onPersonFormSubmit($event)"></app-person-edit>
     </ng-template>
   `
 })
@@ -33,11 +35,34 @@ export class AppComponent implements OnInit {
     console.log(this.personEditTemplate);
   }
 
-  onAddPerson() {
+  onEditPerson(person) {
     this.tabsComponent.openTab(
-      'Dynamic title',
+      `Editing ${person.name}`,
       this.personEditTemplate,
-      this.people[0]
+      person,
+      true
     );
+  }
+
+  onAddPerson() {
+    this.tabsComponent.openTab('New Person', this.personEditTemplate, {}, true);
+  }
+
+  onPersonFormSubmit(dataModel) {
+    if (dataModel.id > 0) {
+      this.people = this.people.map(person => {
+        if (person.id === dataModel.id) {
+          return dataModel;
+        } else {
+          return person;
+        }
+      });
+    } else {
+      // create a new one
+      dataModel.id = Math.round(Math.random() * 100);
+      this.people.push(dataModel);
+    }
+
+    this.tabsComponent.closeActiveTab();
   }
 }

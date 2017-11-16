@@ -1,3 +1,4 @@
+import { PeopleListComponent } from './../people/people-list.component';
 import {
   Component,
   ContentChildren,
@@ -46,7 +47,7 @@ export class TabsComponent implements AfterContentInit {
     }
   }
 
-  openTab(title: string, template, data, isCloseable: boolean = true) {
+  openTab(title: string, template, data, isCloseable = false) {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
       TabComponent
     );
@@ -80,18 +81,21 @@ export class TabsComponent implements AfterContentInit {
   closeTab(tab: TabComponent) {
     for (let i = 0; i < this.dynamicTabs.length; i++) {
       if (this.dynamicTabs[i] === tab) {
-        // remove the tab from our array
         this.dynamicTabs.splice(i, 1);
 
-        // destroy our dynamically created component again
         const viewContainerRef = this.dynamicTabPlaceholder.viewContainer;
-        // let viewContainerRef = this.dynamicTabPlaceholder;
         viewContainerRef.remove(i);
 
-        // set tab index to 1st one
         this.selectTab(this.tabs.first);
         break;
       }
+    }
+  }
+
+  closeActiveTab() {
+    let activeTab = this.dynamicTabs.filter(tab => tab.active);
+    if (activeTab.length > 0) {
+      this.closeTab(activeTab[0]);
     }
   }
 }
